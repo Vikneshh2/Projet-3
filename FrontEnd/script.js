@@ -1,17 +1,68 @@
-// let button = document.createElement("button")
-// button.innerText = Tous
+// const form = document.getElementById ("contact")
+// form.addEventListener("submit", async function (event) {
+//   event.preventDefault()
+//   const email = document.getElementById("email").value
+//   const password = document.getElementById("password").value
+//   try {
+//     const response = await fetch("http://localhost:5678/api/users/login") 
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//   body: JSON.stringify({
+//     email: email,
+//     password: password
+//   })
+// })
+//   if (!response.ok) {
+//     console.log("Identifiants incorrects")
+//     return
+//   }
 
-// let body = document.querySelector("body")
-// body.appendChild(button)
+//    const data = await response.json()
+//     localStorage.setItem("token", data.token)
+//     window.location.href = "login.html"
+//   }catch(error){
+//     console.log("Erreur serveur",error)
+//   } 
 
-// let html = `
-//     <nav class="buttons-container">
-// 			<ul class="buttons-filtre">
-// 				<li><button class="categories">Tous</button></li>
-// 				<li><button class="categories">Objets</button></li>
-// 				<li><button class="categories">Appartements</button></li>
-// 				<li><button class="categories">Hotels & restaurants</button></li>
-// 			</ul>
-// 		</nav>
-// `
-// document.getElementById("filtres").innerHTML = html;
+// })
+
+
+
+const form = document.getElementById("login-form")
+
+form.addEventListener("submit", async function (event) {
+  event.preventDefault()
+
+  const email = document.getElementById("email").value
+  const password = document.getElementById("password").value
+
+  try {
+    const response = await fetch("http://localhost:5678/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    })
+
+    if (!response.ok) {
+      console.log("Identifiants incorrects")
+      return
+    }
+
+    const data = await response.json()
+
+    localStorage.setItem("token", data.token)
+
+    window.location.href = "login.html"
+
+  } catch (error) {
+    console.log("Erreur serveur", error)
+  }
+})
+

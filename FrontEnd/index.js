@@ -2,34 +2,12 @@
 //////////// Fetch ////////////
 
 
-async function afficherCategories() {
-  const response = await fetch ("http://localhost:5678/api/categories")
-  const categories = await response.json()
-
-    const button = document.createElement ("button")
-    button.textContent = "Tous"
-    button.addEventListener("click", function(){
-    })
-    const filtres = document.getElementById ("filtres")
-    filtres.appendChild(button)
-
-  categories.forEach(categorie => {
-    const button = document.createElement ("button")
-    button.textContent = categorie.name
-    button.addEventListener("click", function() {
-    })
-    filtres.appendChild(button)
-    
-  })
-
-  console.log(categories)
-}
-afficherCategories()
-
-
-async function afficherWorks() {
-  const response = await fetch ("http://localhost:5678/api/works")
-  const works = await response.json()
+async function afficherWorks(works) {
+  if (works === null){
+       const response = await fetch ("http://localhost:5678/api/works")
+      works = await response.json()
+  }
+  document.getElementById("gallery").innerHTML = ""
 
   works.forEach(work => {
     const figure = document.createElement("figure")
@@ -42,10 +20,48 @@ async function afficherWorks() {
     figure.appendChild(figcaption)
     gallery.appendChild(figure)
     
-  }); 
+  }) 
 
   console.log(works)
 }
-afficherWorks()
+afficherWorks(null)
+
+
+async function afficherCategories() {
+  const response = await fetch ("http://localhost:5678/api/categories")
+  const categories = await response.json()
+
+    const buttonTous = document.createElement ("button")
+    buttonTous.textContent = "Tous"
+    const filtres = document.getElementById ("filtres")
+    filtres.appendChild(buttonTous)
+    buttonTous.addEventListener("click",async function(){
+      afficherWorks()
+      console.log("Clique sur Tous")
+    })
+  categories.forEach(categorie => {
+    const button = document.createElement ("button")
+    button.textContent = categorie.name
+    filtres.appendChild(button)
+    button.addEventListener("click", async function (){
+        const response = await fetch ("http://localhost:5678/api/works")
+        const works = await response.json()
+      const worksFiltres = works.filter(
+        work => work.category.name === categorie.name
+      )
+      console.log(categorie.name)
+      afficherWorks(worksFiltres)
+      console.log(worksFiltres)
+      console.log("Clique sur Catégorie:")
+    })
+  })
+
+  console.log(categories)
+}
+
+afficherCategories()
+
+
+
 
 
