@@ -10,14 +10,22 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
+	
 <body>
+		<div id="edit-banner" >
+	<div><i class="fa-regular fa-pen-to-square"></i></div>
+  <p>Mode édition</p>
+</div>
+	<div class="root-div">
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<a href="index.html">
+	<h1 >Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li><a href="login.html">login</a></li>
+			<li><a href="login.html" class="deconnecter">login</a></li>
+			<li><a href="login.html" class="connecter">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram" class="instagram-logo"></li>
 		</ul>
 	</nav>
@@ -35,8 +43,13 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div id="filtres"></div>
+	
+		<section class="next">
+			<h2>Mes Projets</h2>
+			<button id="modifier"  class="connecter">modifier</button>
+		</section>
+<i class="fa-regular fa-pen-to-square"></i>
+		<div id="filtres" class="deconnecter"></div>
 		<section id="gallery"></section>
 	</section>
 	<section id="contact">
@@ -61,7 +74,17 @@
 		</ul>
 	</nav>
 </footer>
-<script src="script.js"></script>
+	</div>
+	<div class="modal-container">
+			<div class="overlay modal-trigger"></div>
+			<div class="modal">
+				<button class="close-modal">X</button>
+				<h3>Galerie Photo</h3>
+				<button>Ajouter une photo</button>
+			</div>
+		</div>
+
+
 <script src="index.js"></script>
 </body>
 </html>

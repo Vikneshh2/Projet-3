@@ -12,7 +12,8 @@
 </head>
 <body>
   <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<a href="index.html">
+	<h1 >Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
 	<nav>
 		<ul>
 			<li>projets</li>
@@ -31,7 +32,11 @@
     <input type="password" id="password" required>
     <input type="submit" value="Se connecter">
   </form>
+	<p>Mot de passe oublié</p>
 </section>
+	<p id="error-message" style="color: red; display: none;">
+  Email ou mot de passe incorrect
+</p>
 <footer>
 	<nav>
 		<ul>
@@ -39,5 +44,6 @@
 		</ul>
 	</nav>
 </footer>
+<script src="login.js"></script>
 </body>
 </html>
