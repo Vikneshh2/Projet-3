@@ -37,3 +37,14 @@ event.preventDefault() // Empêche l'actualisation de page à chaque connexion
   }
 })
 
+function afficherModeDeconnecte() {
+  document.querySelector(".edit-banner").style.display = "none"
+  document.querySelector(".filtres").style.display = "flex"
+  document.querySelector(".login-link").textContent = "login"
+}
+
+function afficherModeConnecte() {
+  document.querySelector(".edit-banner").style.display = "flex"
+  document.querySelector(".filtres").style.display = "none"
+  document.querySelector(".login-link").textContent = "logout"
+}

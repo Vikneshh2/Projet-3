@@ -7,13 +7,14 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 	
 <body>
-		<div id="edit-banner" >
-	<div><i class="fa-regular fa-pen-to-square"></i></div>
+		<div id="edit-banner">
+	<i class="fa-regular fa-pen-to-square"></i>
   <p>Mode édition</p>
 </div>
 	<div class="root-div">
@@ -46,9 +47,11 @@
 	
 		<section class="next">
 			<h2>Mes Projets</h2>
+			<div class="edit-btn">
+			<i class="fa-regular fa-pen-to-square"></i>
 			<button id="modifier"  class="connecter">modifier</button>
+			</div>
 		</section>
-<i class="fa-regular fa-pen-to-square"></i>
 		<div id="filtres" class="deconnecter"></div>
 		<section id="gallery"></section>
 	</section>
@@ -75,16 +78,65 @@
 	</nav>
 </footer>
 	</div>
+
 	<div class="modal-container">
 			<div class="overlay modal-trigger"></div>
 			<div class="modal">
-				<button class="close-modal">X</button>
+				<div id="content1">
+				<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
 				<h3>Galerie Photo</h3>
-				<button>Ajouter une photo</button>
+				<div id="container-photo">
+				</div>
+				<div class="line"></div>
+				<button class="button-add-photo">Ajouter une photo</button>
+				</div>
+				<div id="content2">
+					<button class="previous" id="previous"><i class="fa-solid fa-arrow-left"></i></button>
+				<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+				<h3>Ajout photo</h3>
+				<div class="ajouter-photo">
+					<div class="image-icon"><i class="fa-solid fa-image"></i></div>
+					<button class="add-photo">+ Ajouter photo</button>
+					<p>jpg, png : 4mo max</p>
+				</div>
+				<div id="ajouter-photo-form">
+						<form action="" method="post">
+							<label for="titre">Titre</label>
+						<input type="text" name="titre" id="titre">
+							<label for="titre">Catégorie</label>
+						<input type="text" name="categorie" id="categorie">
+						</form>
+					</div>
+					<div class="line"></div>
+				<button class="button-valid">Valider</button>
+				</div>
 			</div>
 		</div>
 
-
+		<!-- <div class="modal-container">
+			<div class="overlay modal-trigger"></div>
+			<div class="modal">
+				<button class="previous"><i class="fa-solid fa-arrow-left"></i></button>
+				<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+				<h3>Ajout photo</h3>
+				<div class="ajouter-photo">
+					<div class="image-icon"><i class="fa-solid fa-image"></i></div>
+					<button class="add-photo">+ Ajouter photo</button>
+					<p>jpg, png : 4mo max</p>
+				</div>
+				<div id="ajouter-photo-form">
+						<form action="" method="post">
+							<label for="titre">Titre</label>
+						<input type="text" name="titre" id="titre">
+							<label for="titre">Catégorie</label>
+						<input type="text" name="categorie" id="categorie">
+						</form>
+					</div>
+					<div class="line"></div>
+				<button class="button-valid">Valider</button>
+			</div>
+		</div> -->
+		
 <script src="index.js"></script>
 </body>
 </html>

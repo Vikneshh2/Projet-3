@@ -1,5 +1,5 @@
 
-//////////// Fetch ////////////
+//////////// Afficher les works ////////////
 
 async function afficherWorks(works) {
   // Vérifie si les works sont chargés ou non, S'ils ne le sont pas alors on récupère depuis le backend 
@@ -7,6 +7,9 @@ async function afficherWorks(works) {
        const response = await fetch ("http://localhost:5678/api/works")
       works = await response.json()
   }
+
+/////////// Reprise des travaux pour la page d'accueuil ////////////
+
   // Vide la galerie avant de pouvoir à nouveau remettre des éléments. Au cas contraire ils ajouteraient sans supprimer le reste 
   document.getElementById("gallery").innerHTML = ""
 
@@ -22,6 +25,25 @@ async function afficherWorks(works) {
     gallery.appendChild(figure)
     
   }) 
+
+/////////// Reprise des travaux pour la modale ////////////
+
+  document.getElementById("container-photo").innerHTML = ""
+
+  works.forEach(work => {
+    const big_container = document.getElementById("container-photo")
+    const container = document.createElement("div")
+    container.className = "image-container"
+    const icon = document.createElement ("i")
+    icon.className = "fa-solid fa-trash-can"
+    const img = document.createElement ("img")
+    img.src = work.imageUrl
+    img.alt = work.title
+    container.append(img)
+    container.append(icon)
+    big_container.append(container)
+  }) 
+
 
   console.log(works)
 }
@@ -63,34 +85,114 @@ async function afficherCategories() {
 afficherCategories()
 
 
+//////////// Connexion ////////////
 
-let deconnecter = document.getElementsByClassName ("deconnecter")
-let connecter = document.getElementsByClassName ("connecter")
+// Sélection des éléments
+const loginLink = document.querySelector(".deconnecter") // login
+const logoutLink = document.querySelector(".connecter") // logout
+const editBanner = document.getElementById("edit-banner") // bandeau mode édition
+const modifierBtn = document.getElementById("modifier") // bouton modifier
+const filtres = document.getElementById("filtres") // filtres
+const editButtons = document.querySelectorAll(".edit-btn button") // autres boutons d'édition
 
-function init() {
-  let token = localStorage.getItem ("token")
-  if (token == null) {
-    for (let utilisateur_connecter of connecter) {
-      utilisateur_connecter.style.display = "none"
-      console.log("L'utilisateur est connecté")
-    }
-  }
-  else {
-        for (let utilisateur_deconnecter of deconnecter) {
-      utilisateur_deconnecter.style.display = "none"
-      console.log("L'utilisateur est déconnecté")
-    }
-  }
+// Vérifier si l'utilisateur est connecté
+const token = localStorage.getItem("token")
+
+if (token) {
+  // l'utilisateur est connecté
+  console.log("Utilisateur connecté")
+
+  // Afficher le mode édition
+  editBanner.style.display = "flex"
+
+  // Cacher les filtres
+  if (filtres) filtres.style.display = "none"
+
+  // Afficher le bouton Modifier
+  if (modifierBtn) modifierBtn.style.display = "inline-flex"
+
+  // Afficher tous les boutons d'édition
+  editButtons.forEach(btn => btn.style.display = "inline-flex")
+
+  // Cacher le lien login et afficher logout
+  loginLink.style.display = "none"
+  logoutLink.style.display = "inline"
+
+  // Déconnexion
+  logoutLink.addEventListener("click", () => {
+    localStorage.removeItem("token")
+    window.location.reload()
+  })
+
+} else {
+  // L'utilisateur est déconnecté
+  console.log("Utilisateur non connecté")
+
+  // Cacher le mode édition et le bouton modifier
+  editBanner.style.display = "none"
+  if (modifierBtn) modifierBtn.style.display = "none"
+
+  // Afficher les filtres
+  if (filtres) filtres.style.display = "flex"
+
+  // Cacher les autres boutons d'édition
+  editButtons.forEach(btn => btn.style.display = "none")
+
+  // Afficher login et cacher logout
+  loginLink.style.display = "inline"
+  logoutLink.style.display = "none"
 }
 
 
-init()
+////////// Gestion de la modale /////////
 
-const modalContainer = document.querySelector(".modal-container");
-const modalTriggers = document.querySelectorAll (".modal-trigger");
+var btn = document.getElementById ("modifier");
 
-modalTriggers.forEach(trigger => trigger.addEventListener ("click", toggleModal))
+var modal = document.getElementsByClassName ("modal-container") [0];
 
-function toggleModal () {
-  modalContainer.classList.toggle("active")
+var close = document.getElementsByClassName ("close-modal") [0];
+
+var overlay = document.getElementsByClassName ("overlay")[0]; 
+
+var ajouter = document.getElementsByClassName ("button-add-photo")[0];
+
+var content1 = document.getElementById ("content1");
+
+var content2 = document.getElementById ("content2");
+
+var previous = document.getElementById ("previous")
+/*Lorsqu'on récupère un élément via get, la fonction renvoie toujours une liste et donc en mettant le 0,
+ on réccupère le premier élement de la liste */ 
+
+btn.onclick = function() {
+  modal.style.display = "block";
 }
+
+close.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == overlay) {
+    modal.style.display = "none"
+  }
+}
+
+ajouter.addEventListener("click",() => {
+   console.log("Bouton ajouter")
+   content1.style.display = "none"
+   content2.style.display = "block"
+   
+  }
+
+)
+
+previous.addEventListener ("click",() => {
+   console.log("Bouton précèdent")
+   content1.style.display = "block"
+   content2.style.display = "none"
+   
+  }
+
+)
+

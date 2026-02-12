@@ -233,14 +233,29 @@ footer nav ul {
 }
 
 #edit-banner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
   background-color: black;
   color: white;
   text-align: center;
-  padding: 10px;
+  /* padding: 10px; */
 	margin: 0;
 	height: 59px;
 	width: 100%;
+	font-family: 'Work Sans';
 
+}
+
+#edit-banner p {
+margin-left: 10px;
+}
+
+.edit-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 20px;
 }
 
 #modifier {
@@ -256,6 +271,7 @@ footer nav ul {
 display: flex;
 vertical-align: middle;
 justify-content: center;
+align-items: center;
 }
 
 
@@ -264,8 +280,14 @@ a {
 }
 
 
+
+
+
+/*********** Modal ***********/
+
+
 .modal-container {
-	/* display: none; */
+	display: none;
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -274,6 +296,20 @@ a {
 
 .modal-container.active {
 	display: block;
+}
+
+
+.button-add-photo{
+ background-color: #1D6154;
+ color: white;
+ font-family: 'Syne';
+ font-size: 14px;
+ border: none;
+ border-radius: 20px;
+ padding: 8px 16px;
+ width: 236px;
+ height: 36px;
+margin: 20px;
 }
 
 .overlay {
@@ -287,19 +323,28 @@ a {
 	font-family: 'Work Sans';
 	font-size: 26px;
 	text-align: center;
-	padding: 50px;
+	padding: 20px;
+	padding-bottom: 0;
 }
 
 .modal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 95%;
-	max-width: 500px;
+	max-width: 600px;
 	min-width: 300px;
 	background: white;
 	border-radius: 5px;
 	position: absolute;
-	top: 40%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	padding: 40px;
+}
+
+#content2 {
+	display: none;
 }
 
 .close-modal {
@@ -314,3 +359,162 @@ a {
 	color: black;
 	background: none;
 }
+
+.image-container {
+  position: relative; 
+  display: block;
+}
+
+.image-container i {
+  position: absolute;
+  top: 5px;    
+  right: 5px;   
+  color: white;
+  font-size: 10px;
+  background: black;
+  padding: 4px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.image-container img {
+	display: block;
+}
+
+.modal img {
+	display: block;
+	max-width: 90px;
+}
+
+.modal .icon {
+	position: absolute;
+	top: 10px;
+}
+
+#container-photo {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	row-gap: 20px;
+	padding: 50px;
+}
+
+.line {
+	width: 85%;
+	height: 1px;
+	background-color: gray;
+	margin-bottom: 20px;
+}
+
+
+.ajouter-photo {
+	display: flex;
+	flex-direction: column;
+	width: 420px ;
+	height: 169px;
+	background-color: #E8F1F6;	
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+
+#ajouter-photo-form {
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.previous {
+		padding: 8px 10px;
+	border: none;
+	border-radius: 5px;
+	font-size: 18px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	cursor: pointer;
+	color: black;
+	background: none;
+}
+
+
+.image-icon {
+	color: #B9C5CC;
+	font-size: 76px;
+
+}
+
+.add-photo {
+	border: none;
+	background-color: #CBD6DC;
+	padding: 8px 16px;
+	margin: 10px;
+	border-radius: 20px;
+	width: 173px;
+	height: 36px;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	color: #306685;
+	font-weight: 500;
+}
+
+.ajouter-photo p {
+	font-size: 10px;
+	color: #444444;
+}
+
+
+#ajouter-photo-form input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#ajouter-photo-form label {
+	margin: 2em 0 1em 0;
+}
+
+
+#ajouter-photo-form form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 40px;
+}
+
+#ajouter-photo-form label {
+	font-family: 'Work Sans';
+}
+
+.button-valid {
+	background-color: #A7A7A7;
+	color: white;
+	width: 237px;
+	height: 36px;
+	padding: 8px ;
+	border: none;
+	font-family: 'Syne';
+	border-radius:20px;
+	text-align: center;
+}
+
+/************ Login ************/
+
+.text-deco {
+	font-size: 14px;
+	text-decoration: underline;
+	color: #3D3D3D;
+	font-family: 'Work Sans';
+}
+
+.root-div span {
+	font-weight: 600;
+}
+
+.root-div li {
+	font-size: 16px;
+}
+
