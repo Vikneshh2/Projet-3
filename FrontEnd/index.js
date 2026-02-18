@@ -34,13 +34,16 @@ async function afficherWorks(works) {
     const big_container = document.getElementById("container-photo")
     const container = document.createElement("div")
     container.className = "image-container"
-    const icon = document.createElement ("i")
-    icon.className = "fa-solid fa-trash-can"
+    const supprimer = document.createElement ("i")
+    supprimer.className = "fa-solid fa-trash-can"
+    supprimer.addEventListener("click", function() {
+      supprimerWorks(work.id)
+    })
     const img = document.createElement ("img")
     img.src = work.imageUrl
     img.alt = work.title
     container.append(img)
-    container.append(icon)
+    container.append(supprimer)
     big_container.append(container)
   }) 
 
@@ -48,6 +51,20 @@ async function afficherWorks(works) {
   console.log(works)
 }
 afficherWorks(null)
+
+
+async function supprimerWorks(id) {
+  await fetch ("http://localhost:5678/api/works/" + id,{
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token")
+    } 
+  })
+  
+  console.log("work supprimé")
+  afficherWorks(null)
+}
+
 
 
 async function afficherCategories() {
@@ -155,14 +172,15 @@ var close = document.getElementsByClassName ("close-modal") [0];
 var overlay = document.getElementsByClassName ("overlay")[0]; 
 
 var ajouter = document.getElementsByClassName ("button-add-photo")[0];
+/*Lorsqu'on récupère un élément via get, la fonction renvoie toujours une liste et donc en mettant le 0,
+ on réccupère le premier élement de la liste */ 
 
 var content1 = document.getElementById ("content1");
 
 var content2 = document.getElementById ("content2");
 
 var previous = document.getElementById ("previous")
-/*Lorsqu'on récupère un élément via get, la fonction renvoie toujours une liste et donc en mettant le 0,
- on réccupère le premier élement de la liste */ 
+
 
 btn.onclick = function() {
   modal.style.display = "block";
