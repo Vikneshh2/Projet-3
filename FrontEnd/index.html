@@ -90,53 +90,50 @@
 				<div class="line"></div>
 				<button class="button-add-photo">Ajouter une photo</button>
 				</div>
+
 				<div id="content2">
 					<button class="previous" id="previous"><i class="fa-solid fa-arrow-left"></i></button>
 				<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
 				<h3>Ajout photo</h3>
-				<div class="ajouter-photo">
+				<div id="display-photo">
+					<!-- <div id="display-content"> -->
+					<img src="" alt="" id="display">
 					<div class="image-icon"><i class="fa-solid fa-image"></i></div>
-					<button class="add-photo">+ Ajouter photo</button>
-					<p>jpg, png : 4mo max</p>
+					<form>
+						<label id="add-photo" for="file">+ Ajouter photo</label>
+							<input type="file" name="file" id="file" accept="image/jpg image/png">
+					</form>
+					<p id="info-photo">jpg, png : 4mo max</p>
+				<!-- </div> -->
 				</div>
 				<div id="ajouter-photo-form">
-						<form action="" method="post">
+						<form action="" method="post" id="form-photo">
 							<label for="titre">Titre</label>
 						<input type="text" name="titre" id="titre">
 							<label for="titre">Catégorie</label>
-						<input type="text" name="categorie" id="categorie">
+						<!-- <input type="text" name="categorie" id="categorie">
+						<div id="afficher-categories">
+							<ul>
+								<li>Catégorie1</li>
+								<li>Catégorie2</li>
+								<li>Catégorie3</li>
+							</ul>
+						</div> -->
+						<select id="afficher-categories">
+							<option id="option-defaut" disabled selected>Veuillez selctionner une catégorie</option>
+							<!-- <option>Objets</option>
+							<option>Appartements</option>
+							<option>Hôtels & restaurants</option> -->
+						</select>
 						</form>
 					</div>
 					<div class="line"></div>
 				<button class="button-valid">Valider</button>
+				<p id="message-error">Le formulaire est incomplet ou vide</p>
 				</div>
 			</div>
 		</div>
 
-		<!-- <div class="modal-container">
-			<div class="overlay modal-trigger"></div>
-			<div class="modal">
-				<button class="previous"><i class="fa-solid fa-arrow-left"></i></button>
-				<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
-				<h3>Ajout photo</h3>
-				<div class="ajouter-photo">
-					<div class="image-icon"><i class="fa-solid fa-image"></i></div>
-					<button class="add-photo">+ Ajouter photo</button>
-					<p>jpg, png : 4mo max</p>
-				</div>
-				<div id="ajouter-photo-form">
-						<form action="" method="post">
-							<label for="titre">Titre</label>
-						<input type="text" name="titre" id="titre">
-							<label for="titre">Catégorie</label>
-						<input type="text" name="categorie" id="categorie">
-						</form>
-					</div>
-					<div class="line"></div>
-				<button class="button-valid">Valider</button>
-			</div>
-		</div> -->
-		
 <script src="index.js"></script>
 </body>
 </html>

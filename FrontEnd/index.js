@@ -36,8 +36,10 @@ async function afficherWorks(works) {
     container.className = "image-container"
     const supprimer = document.createElement ("i")
     supprimer.className = "fa-solid fa-trash-can"
+    // Ici function() sert d'intérmediaire 
     supprimer.addEventListener("click", function() {
       supprimerWorks(work.id)
+      afficherWorks(null)
     })
     const img = document.createElement ("img")
     img.src = work.imageUrl
@@ -46,7 +48,6 @@ async function afficherWorks(works) {
     container.append(supprimer)
     big_container.append(container)
   }) 
-
 
   console.log(works)
 }
@@ -60,9 +61,7 @@ async function supprimerWorks(id) {
       Authorization: "Bearer " + localStorage.getItem("token")
     } 
   })
-  
   console.log("work supprimé")
-  afficherWorks(null)
 }
 
 
@@ -171,7 +170,7 @@ var close = document.getElementsByClassName ("close-modal") [0];
 
 var overlay = document.getElementsByClassName ("overlay")[0]; 
 
-var ajouter = document.getElementsByClassName ("button-add-photo")[0];
+var next = document.getElementsByClassName ("button-add-photo")[0];
 /*Lorsqu'on récupère un élément via get, la fonction renvoie toujours une liste et donc en mettant le 0,
  on réccupère le premier élement de la liste */ 
 
@@ -183,7 +182,7 @@ var previous = document.getElementById ("previous")
 
 
 btn.onclick = function() {
-  modal.style.display = "block";
+  modal.style.display = "flex";
 }
 
 close.onclick = function() {
@@ -196,7 +195,7 @@ window.onclick = function(event) {
   }
 }
 
-ajouter.addEventListener("click",() => {
+  next.addEventListener("click",() => {
    console.log("Bouton ajouter")
    content1.style.display = "none"
    content2.style.display = "block"
@@ -214,3 +213,122 @@ previous.addEventListener ("click",() => {
 
 )
 
+
+
+///////// Ajouter photo /////////
+
+
+var display = document.getElementById("display")
+var inputFile = document.getElementById("file")
+var icon_photo = document.getElementsByClassName("fa-image")[0]
+var btn_ajouter_photo = document.getElementById ("add-photo")
+const info_photo = document.getElementById("info-photo")
+var titre = document.getElementById("titre")
+
+// var display_content = document.getElementById("display-content")
+
+
+
+  btn_ajouter_photo.addEventListener("click", () => {
+    console.log("masquer bouton")
+    // display_content.style.display = "none"
+    // inputFile.style.display="block"
+    icon_photo.style.display= "none"
+    btn_ajouter_photo.style.display= "none" 
+    info_photo.style.display="none"
+  })
+
+  inputFile.onchange = function() {
+  display.src = URL.createObjectURL(inputFile.files[0])  
+}
+
+
+const liste_categories = document.getElementById("afficher-categories")
+
+fetch("http://localhost:5678/api/categories")
+.then(response => response.json())
+.then(categories => {
+  console.log (categories)
+
+  categories.forEach (category => {
+    var option = document.createElement("option")
+    option.value= category.id
+    option.textContent= category.name
+    liste_categories.appendChild(option)
+  })
+
+})
+
+
+var valider = document.getElementsByClassName("button-valid")[0]
+
+
+valider.addEventListener ("click",() => {
+   console.log("tout va bien")
+   valider.style.color = "red"
+   var textTitle = titre.value
+   var categorieId = liste_categories.value
+   var imgFile = inputFile.files[0]
+  var data = new FormData()
+  data.append('image', imgFile)
+  data.append('title', textTitle)
+  data.append('category', categorieId)
+
+
+  fetch ("http://localhost:5678/api/works/" ,{
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token")
+    }, 
+    body: data
+  })
+  .then( ()=> {
+    console.log("work ajouté")
+    afficherWorks(null)})
+     document.getElementById("display-photo").innerHTML = ""
+     document.getElementById("titre").innerHTML = ""
+ 
+  })
+
+
+const errorMessage = document.getElementById("message-error");
+const formulaire = document.getElementById("form-photo");
+
+formulaire.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const image = document.getElementById("display").files[0];
+  const title = document.getElementById("titre").value;
+  const category = document.getElementById("afficher-categorie").value;
+  const token = localStorage.getItem("token");
+
+  if (!image || !title || !category) {
+    errorMessage.style.display = "block";
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", image);
+  formData.append("title", title);
+  formData.append("category", category);
+
+  try {
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token
+      },
+      body: formData
+    });
+
+    if (!response.ok) {
+      errorMessage.style.display = "block";
+      return;
+    }
+
+    console.log("Projet ajouté ✅");
+
+  } catch (error) {
+    console.log("Erreur :", error);
+  }
+});
